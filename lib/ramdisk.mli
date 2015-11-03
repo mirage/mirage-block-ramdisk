@@ -14,8 +14,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *)
 
+(** An in-memory BLOCK device also known as a Ramdisk *)
+
+(** {6 Basic operation} *)
+
 include V1_LWT.BLOCK
   with type id = string
+
+val connect: name:string -> [ `Ok of t | `Error of error ] io
+(** Connect to the named ramdisk. *)
 
 val create: name:string -> size_sectors:int64 -> sector_size:int
   -> [ `Ok of t | `Error of error ] io
@@ -27,13 +34,14 @@ val destroy: name:string -> unit
 (** Destroy removes an in-memory block device. Subsequent calls to
     [connect] will create a fresh empty device. *)
 
-val connect: name:string -> [ `Ok of t | `Error of error ] io
-(** Connect to the named ramdisk. *)
+(** {6 Resizing support} *)
 
 val resize : t -> int64 -> [ `Ok of unit | `Error of error ] io
 (** [resize t new_size_sectors] attempts to resize the connected device
     to have the given number of sectors. If successful, subsequent calls
     to [get_info] will reflect the new size. *)
+
+(** {6 Querying sparseness information} *)
 
 val seek_unmapped: t -> int64 -> [ `Ok of int64 | `Error of error ] io
 (** [seek_unmapped t start] returns the offset of the next guaranteed
