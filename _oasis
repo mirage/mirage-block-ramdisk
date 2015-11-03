@@ -13,7 +13,7 @@ Library mirage_block_ramdisk
   Path:               lib
   Findlibname:        mirage-block-ramdisk
   Modules:            Ramdisk
-  BuildDepends:       cstruct, io-page, mirage-types-lwt
+  BuildDepends:       cstruct, io-page, mirage-types.lwt
 
 Document mirage_block_ramdisk
   Title:                Mirage ramdisk documentation
