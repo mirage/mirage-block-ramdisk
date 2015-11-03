@@ -27,7 +27,8 @@ val destroy: name:string -> unit
 (** Destroy removes an in-memory block device. Subsequent calls to
     [connect] will create a fresh empty device. *)
 
-val connect: name:string -> [ `Ok of t | `Error of error ] Lwt.t
+val connect: name:string -> [ `Ok of t | `Error of error ] io
+(** Connect to the named ramdisk. *)
 
 val resize : t -> int64 -> [ `Ok of unit | `Error of error ] io
 (** [resize t new_size_sectors] attempts to resize the connected device
