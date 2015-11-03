@@ -1,0 +1,53 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Ramdisk" rel="Chapter" href="Ramdisk.html"><title>Index of values</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Index of values</h1>
+<table>
+<tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Ramdisk.html#VALconnect">connect</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td></td></tr>
+<tr><td><a href="Ramdisk.html#VALcreate">create</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td><div class="info">
+Create an in-memory block device (a "ramdisk") with a given name,
+    total size in sectors and sector size.
+</div>
+</td></tr>
+<tr><td align="left"><br>D</td></tr>
+<tr><td><a href="Ramdisk.html#VALdestroy">destroy</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td><div class="info">
+Destroy removes an in-memory block device.
+</div>
+</td></tr>
+<tr><td align="left"><br>R</td></tr>
+<tr><td><a href="Ramdisk.html#VALresize">resize</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td><div class="info">
+<code class="code">resize t new_size_sectors</code> attempts to resize the connected device
+    to have the given number of sectors.
+</div>
+</td></tr>
+<tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Ramdisk.html#VALseek_mapped">seek_mapped</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td><div class="info">
+<code class="code">seek_mapped t start</code> returns the offset of the next regoin of the
+    device which may have data in it (typically this is the next mapped
+    region)
+</div>
+</td></tr>
+<tr><td><a href="Ramdisk.html#VALseek_unmapped">seek_unmapped</a> [<a href="Ramdisk.html">Ramdisk</a>]</td>
+<td><div class="info">
+<code class="code">seek_unmapped t start</code> returns the offset of the next guaranteed
+    zero-filled region (typically guaranteed because it is unmapped)
+</div>
+</td></tr>
+</table>
+</body>
+</html>
