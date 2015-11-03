@@ -17,7 +17,8 @@
 include V1_LWT.BLOCK
   with type id = string
 
-val create: name:string -> size_sectors:int64 -> sector_size:int -> unit
+val create: name:string -> size_sectors:int64 -> sector_size:int
+  -> [ `Ok of t | `Error of error ] io
 (** Create an in-memory block device (a "ramdisk") with a given name,
     total size in sectors and sector size. Two calls to [connect] with the
     same name will return the same block device *)

@@ -59,7 +59,8 @@ let create ~name ~size_sectors ~sector_size =
     sector_size;
   } in
   let device = { map; info; id = name } in
-  Hashtbl.replace devices name device
+  Hashtbl.replace devices name device;
+  return (`Ok device)
 
 let destroy ~name = Hashtbl.remove devices name
 
