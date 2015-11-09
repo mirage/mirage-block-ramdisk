@@ -80,11 +80,7 @@ let rec read x sector_start buffers = match buffers with
   | b :: bs ->
     if Int64Map.mem sector_start x.map
     then Cstruct.blit (Int64Map.find sector_start x.map) 0 b 0 512
-    else begin
-      for i = 0 to 511 do
-        Cstruct.set_uint8 b i 0
-      done
-    end;
+    else Cstruct.(memset (sub b 0 512) 0);
     read x (Int64.succ sector_start)
       (if Cstruct.len b > 512
        then (Cstruct.shift b 512) :: bs
