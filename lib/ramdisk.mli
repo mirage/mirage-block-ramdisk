@@ -51,3 +51,8 @@ val seek_mapped: t -> int64 -> [ `Ok of int64 | `Error of error ] io
 (** [seek_mapped t start] returns the offset of the next regoin of the
     device which may have data in it (typically this is the next mapped
     region) *)
+
+(** {6 Compatibility} *)
+
+val flush : t -> [ `Ok of unit | `Error of error ] io
+(** [flush t] is a no-op on a Ramdisk *)

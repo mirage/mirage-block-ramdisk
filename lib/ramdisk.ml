@@ -117,3 +117,5 @@ let resize x new_size_sectors =
   x.map <- to_keep;
   x.info <- { x.info with size_sectors = new_size_sectors };
   Lwt.return (`Ok ())
+
+let flush x = Lwt.return (`Ok ())
