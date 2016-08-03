@@ -1,6 +1,6 @@
 OASISFormat: 0.3
 Name:        mirage-block-ramdisk
-Version:     0.1
+Version:     0.2
 Synopsis:    Mirage ramdisk implementations
 Authors:     David Scott
 License:     ISC
