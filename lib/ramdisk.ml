@@ -66,10 +66,10 @@ let destroy ~name = Hashtbl.remove devices name
 
 let connect ~name =
   if Hashtbl.mem devices name
-  then return (`Ok (Hashtbl.find devices name))
+  then return (Hashtbl.find devices name)
   else begin
     create ~name ~size_sectors:32768L ~sector_size:512;
-    return (`Ok (Hashtbl.find devices name))
+    return (Hashtbl.find devices name)
   end
 
 let disconnect t =
