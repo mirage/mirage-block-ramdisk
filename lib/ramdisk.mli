@@ -21,7 +21,7 @@
 include V1_LWT.BLOCK
   with type id = string
 
-val connect: name:string -> [ `Ok of t | `Error of error ] io
+val connect: name:string -> t io
 (** Connect to the named ramdisk. *)
 
 val create: name:string -> size_sectors:int64 -> sector_size:int
