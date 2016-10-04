@@ -18,8 +18,6 @@ open Lwt
 
 type 'a io = 'a Lwt.t
 
-type id = string
-
 (* NB not actually page-aligned *)
 type page_aligned_buffer = Cstruct.t
 
@@ -42,10 +40,8 @@ module Int64Map = Map.Make(Int64)
 type t = {
   mutable map: page_aligned_buffer Int64Map.t;
   mutable info: info;
-  id: id;
+  id: string;
 }
-
-let id t = t.id
 
 let devices = Hashtbl.create 1
 

@@ -19,7 +19,6 @@
 (** {6 Basic operation} *)
 
 include V1_LWT.BLOCK
-  with type id = string
 
 val connect: name:string -> t io
 (** Connect to the named ramdisk. *)
