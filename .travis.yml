@@ -5,4 +5,5 @@ script: bash -ex .travis-opam.sh
 sudo: required
 env:
   global:
+    - EXTRA_REMOTES="https://github.com/mirage/mirage-dev.git"
     - PACKAGE="mirage-block-ramdisk" OCAML_VERSION=4.02
