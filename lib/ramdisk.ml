@@ -23,11 +23,7 @@ type page_aligned_buffer = Cstruct.t
 
 let alloc = Cstruct.create
 
-type error = [
-  | `Unknown of string
-  | `Unimplemented
-  | `Is_read_only
-  | `Disconnected ]
+type error = V1.Block.error
 
 type info = {
   read_write: bool;
@@ -56,7 +52,7 @@ let create ~name ~size_sectors ~sector_size =
   } in
   let device = { map; info; id = name } in
   Hashtbl.replace devices name device;
-  return (`Ok device)
+  return (Ok device)
 
 let destroy ~name = Hashtbl.remove devices name
 
@@ -72,7 +68,7 @@ let disconnect t =
   return ()
 
 let rec read x sector_start buffers = match buffers with
-  | [] -> return (`Ok ())
+  | [] -> return (Ok ())
   | b :: bs ->
     if Int64Map.mem sector_start x.map
     then Cstruct.blit (Int64Map.find sector_start x.map) 0 b 0 512
@@ -83,7 +79,7 @@ let rec read x sector_start buffers = match buffers with
        else bs)
 
 let rec write x sector_start buffers = match buffers with
-  | [] -> return (`Ok ())
+  | [] -> return (Ok ())
   | b :: bs ->
     if Cstruct.len b = 512 then begin
       x.map <- Int64Map.add sector_start b x.map;
@@ -96,14 +92,14 @@ let rec write x sector_start buffers = match buffers with
 let seek_mapped t from =
   let rec loop from =
     if from >= t.info.size_sectors || Int64Map.mem from t.map
-    then Lwt.return (`Ok from)
+    then Lwt.return (Ok from)
     else loop (Int64.succ from) in
   loop from
 
 let seek_unmapped t from =
   let rec loop from =
     if from >= t.info.size_sectors || not (Int64Map.mem from t.map)
-    then Lwt.return (`Ok from)
+    then Lwt.return (Ok from)
     else loop (Int64.succ from) in
   loop from
 
@@ -112,6 +108,6 @@ let resize x new_size_sectors =
     Int64Map.partition (fun sector_start _ -> sector_start < new_size_sectors) x.map in
   x.map <- to_keep;
   x.info <- { x.info with size_sectors = new_size_sectors };
-  Lwt.return (`Ok ())
+  Lwt.return (Ok ())
 
-let flush x = Lwt.return (`Ok ())
+let flush x = Lwt.return (Ok ())
