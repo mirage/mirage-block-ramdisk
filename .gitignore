@@ -14,17 +14,3 @@ _build/
 # ocamlbuild targets
 *.byte
 *.native
-
-# oasis generated files
-setup.data
-setup.log
-
-_tags
-lib/META
-lib/mirage_block_ramdisk.mldylib
-lib/mirage_block_ramdisk.mllib
-lib/mirage_block_ramdisk.odocl
-mirage_block_ramdisk.docdir
-myocamlbuild.ml
-setup.bin
-setup.ml
