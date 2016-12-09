@@ -24,7 +24,7 @@ val connect: name:string -> t io
 (** Connect to the named ramdisk. *)
 
 val create: name:string -> size_sectors:int64 -> sector_size:int
-  -> [ `Ok of t | `Error of error ] io
+  -> (t, error) result io
 (** Create an in-memory block device (a "ramdisk") with a given name,
     total size in sectors and sector size. Two calls to [connect] with the
     same name will return the same block device *)
@@ -35,23 +35,23 @@ val destroy: name:string -> unit
 
 (** {6 Resizing support} *)
 
-val resize : t -> int64 -> [ `Ok of unit | `Error of error ] io
+val resize : t -> int64 -> (unit, error) result io
 (** [resize t new_size_sectors] attempts to resize the connected device
     to have the given number of sectors. If successful, subsequent calls
     to [get_info] will reflect the new size. *)
 
 (** {6 Querying sparseness information} *)
 
-val seek_unmapped: t -> int64 -> [ `Ok of int64 | `Error of error ] io
+val seek_unmapped: t -> int64 -> (int64, error) result io
 (** [seek_unmapped t start] returns the offset of the next guaranteed
     zero-filled region (typically guaranteed because it is unmapped) *)
 
-val seek_mapped: t -> int64 -> [ `Ok of int64 | `Error of error ] io
+val seek_mapped: t -> int64 -> (int64, error) result io
 (** [seek_mapped t start] returns the offset of the next regoin of the
     device which may have data in it (typically this is the next mapped
     region) *)
 
 (** {6 Compatibility} *)
 
-val flush : t -> [ `Ok of unit | `Error of error ] io
+val flush : t -> (unit, error) result io
 (** [flush t] is a no-op on a Ramdisk *)
