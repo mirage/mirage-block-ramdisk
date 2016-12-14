@@ -17,7 +17,7 @@ depends: [
   "base-bytes"
   "cstruct"
   "io-page"
-  "mirage-types-lwt"
+  "mirage-types-lwt" {>= "3.0.0"}
   "lwt"
   "ocamlfind" {build}
   "ocamlbuild" {build}

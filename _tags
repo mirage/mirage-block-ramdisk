@@ -1,3 +1,3 @@
 true: annot, bin_annot, safe_string
 true: warn(A)
-<lib/*> : package(cstruct, io-page, lwt, mirage-types.lwt)
+<lib/*> : package(cstruct io-page lwt mirage-types-lwt)
