@@ -6,4 +6,7 @@ sudo: required
 env:
   global:
     - EXTRA_REMOTES="https://github.com/mirage/mirage-dev.git"
-    - PACKAGE="mirage-block-ramdisk" OCAML_VERSION=4.02
+    - PACKAGE="mirage-block-ramdisk"
+  matrix:
+    - OCAML_VERSION=4.03
+    - OCAML_VERSION=4.04
