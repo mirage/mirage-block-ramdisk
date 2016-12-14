@@ -17,10 +17,10 @@ depends: [
   "base-bytes"
   "cstruct"
   "io-page"
-  "mirage-types-lwt"
+  "mirage-types-lwt" {>= "3.0.0"}
   "lwt"
   "ocamlfind" {build}
   "ocamlbuild" {build}
   "topkg" {build}
 ]
-available: [ocaml-version >= "4.02.0"]
+available: [ocaml-version >= "4.03.0"]
