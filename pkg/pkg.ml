@@ -5,5 +5,7 @@ open Topkg
 
 let () =
   Pkg.describe "mirage-block-ramdisk" @@ fun c ->
-  Ok [ Pkg.mllib "lib/mirage_block_ramdisk.mllib";
+  Ok [
+    Pkg.mllib "src/mirage_block_ramdisk.mllib";
+    Pkg.test "test/tests";
   ]
