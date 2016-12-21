@@ -23,7 +23,7 @@ depends: [
   "base-bytes"
   "cstruct"
   "io-page"
-  "mirage-block-lwt"
+  "mirage-block-lwt" {>= "1.0.0"}
   "lwt"
 ]
 available: [ocaml-version >= "4.03.0"]
