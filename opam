@@ -6,7 +6,7 @@ license: "ISC"
 homepage: "https://github.com/mirage/mirage-block-ramdisk"
 dev-repo: "https://github.com/mirage/mirage-block-ramdisk.git"
 bug-reports: "https://github.com/mirage/mirage-block-ramdisk/issues"
-docs: "https://mirage.github.io/mirage-block-ramdisk/"
+doc: "https://mirage.github.io/mirage-block-ramdisk/"
 
 tags: ["org:mirage"]
 build: ["ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%" "--tests" "false"]
