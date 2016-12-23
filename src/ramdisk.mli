@@ -18,7 +18,7 @@
 
 (** {6 Basic operation} *)
 
-include V1_LWT.BLOCK
+include Mirage_block_lwt.S
 
 val connect: name:string -> t io
 (** Connect to the named ramdisk. *)

@@ -1,6 +1,6 @@
 version = "%%VERSION_NUM%%"
 description = "Mirage ramdisk implementations"
-requires = "cstruct io-page mirage-types-lwt lwt"
+requires = "cstruct io-page mirage-block-lwt lwt"
 archive(byte) = "mirage_block_ramdisk.cma"
 archive(native) = "mirage_block_ramdisk.cmxa"
 plugin(byte) = "mirage_block_ramdisk.cma"

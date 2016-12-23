@@ -1,3 +1,6 @@
-true: annot, bin_annot, safe_string
-true: warn(A)
-<lib/*> : package(cstruct io-page lwt mirage-types-lwt)
+true : bin_annot, safe_string, package(bytes)
+true: warn_error(+1..49), warn(A-4-41-44)
+
+<src>: include
+<src/*> : package(cstruct io-page lwt mirage-block-lwt)
+<test/*>: package(mirage-block-lwt lwt alcotest lwt.unix io-page.unix)

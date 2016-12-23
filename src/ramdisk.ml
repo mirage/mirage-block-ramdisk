@@ -14,61 +14,53 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *)
 
-open Lwt
-
 type 'a io = 'a Lwt.t
 
 (* NB not actually page-aligned *)
 type page_aligned_buffer = Cstruct.t
 
-let alloc = Cstruct.create
-
-type error = V1.Block.error
-
-type info = {
-  read_write: bool;
-  sector_size: int;
-  size_sectors: int64;
-}
+type error = Mirage_block.error
+let pp_error = Mirage_block.pp_error
+type write_error = Mirage_block.write_error
+let pp_write_error = Mirage_block.pp_write_error
 
 module Int64Map = Map.Make(Int64)
 
 type t = {
   mutable map: page_aligned_buffer Int64Map.t;
-  mutable info: info;
+  mutable info: Mirage_block.info;
   id: string;
 }
 
 let devices = Hashtbl.create 1
 
-let get_info { info } = return info
+let get_info { info; _ } = Lwt.return info
 
 let create ~name ~size_sectors ~sector_size =
   let map = Int64Map.empty in
   let info = {
-    read_write = true;
+    Mirage_block.read_write = true;
     size_sectors;
     sector_size;
   } in
   let device = { map; info; id = name } in
   Hashtbl.replace devices name device;
-  return (Ok device)
+  Lwt.return (Ok device)
 
 let destroy ~name = Hashtbl.remove devices name
 
 let connect ~name =
   if Hashtbl.mem devices name
-  then return (Hashtbl.find devices name)
+  then Lwt.return (Hashtbl.find devices name)
   else begin
-    create ~name ~size_sectors:32768L ~sector_size:512;
-    return (Hashtbl.find devices name)
+    let _ = create ~name ~size_sectors:32768L ~sector_size:512 in
+    Lwt.return (Hashtbl.find devices name)
   end
 
-let disconnect t =
-  return ()
+let disconnect _ = Lwt.return ()
 
 let rec read x sector_start buffers = match buffers with
-  | [] -> return (Ok ())
+  | [] -> Lwt.return (Ok ())
   | b :: bs ->
     if Int64Map.mem sector_start x.map
     then Cstruct.blit (Int64Map.find sector_start x.map) 0 b 0 512
@@ -79,7 +71,7 @@ let rec read x sector_start buffers = match buffers with
        else bs)
 
 let rec write x sector_start buffers = match buffers with
-  | [] -> return (Ok ())
+  | [] -> Lwt.return (Ok ())
   | b :: bs ->
     if Cstruct.len b = 512 then begin
       x.map <- Int64Map.add sector_start b x.map;
@@ -91,23 +83,23 @@ let rec write x sector_start buffers = match buffers with
 
 let seek_mapped t from =
   let rec loop from =
-    if from >= t.info.size_sectors || Int64Map.mem from t.map
+    if from >= t.info.Mirage_block.size_sectors || Int64Map.mem from t.map
     then Lwt.return (Ok from)
     else loop (Int64.succ from) in
   loop from
 
 let seek_unmapped t from =
   let rec loop from =
-    if from >= t.info.size_sectors || not (Int64Map.mem from t.map)
+    if from >= t.info.Mirage_block.size_sectors || not (Int64Map.mem from t.map)
     then Lwt.return (Ok from)
     else loop (Int64.succ from) in
   loop from
 
 let resize x new_size_sectors =
-  let to_keep, to_throw_away =
+  let to_keep, _ =
     Int64Map.partition (fun sector_start _ -> sector_start < new_size_sectors) x.map in
   x.map <- to_keep;
-  x.info <- { x.info with size_sectors = new_size_sectors };
+  x.info <- { x.info with Mirage_block.size_sectors = new_size_sectors };
   Lwt.return (Ok ())
 
-let flush x = Lwt.return (Ok ())
+let flush _ = Lwt.return (Ok ())
