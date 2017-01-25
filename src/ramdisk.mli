@@ -53,5 +53,5 @@ val seek_mapped: t -> int64 -> (int64, error) result io
 
 (** {6 Compatibility} *)
 
-val flush : t -> (unit, error) result io
+val flush : t -> (unit, write_error) result io
 (** [flush t] is a no-op on a Ramdisk *)
