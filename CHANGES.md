@@ -1,3 +1,9 @@
+0.3 (2017-02-13)
+- update to Mirage 3 APIs
+- now requires OCaml 4.03+
+- convert to topkg
+- add a .merlin file
+
 0.2 (3-Aug-2016)
 - export a `flush` function
 - use `Cstruct.memset`
