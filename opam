@@ -22,6 +22,7 @@ depends: [
   "alcotest"   {test}
   "cstruct"
   "io-page"
+  "io-page-unix" {test}
   "mirage-block-lwt" {>= "1.0.0"}
   "lwt"
 ]
