@@ -20,10 +20,9 @@ depends: [
   "ocamlbuild" {build}
   "topkg"      {build}
   "alcotest"   {test}
-  "base-bytes"
   "cstruct"
   "io-page"
   "mirage-block-lwt" {>= "1.0.0"}
   "lwt"
 ]
-available: [ocaml-version >= "4.03.0"]
+available: [ocaml-version >= "4.04.2"]
