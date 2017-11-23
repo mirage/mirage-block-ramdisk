@@ -8,4 +8,5 @@ env:
     - PACKAGE="mirage-block-ramdisk"
   matrix:
     - OCAML_VERSION=4.04
+    - OCAML_VERSION=4.05
     - OCAML_VERSION=4.06
