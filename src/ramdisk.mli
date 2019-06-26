@@ -16,7 +16,7 @@
 
 (** An in-memory BLOCK device also known as a Ramdisk *)
 
-(** {6 Basic operation} *)
+(** {2 Basic operation} *)
 
 include Mirage_block_lwt.S
 
@@ -33,14 +33,14 @@ val destroy: name:string -> unit
 (** Destroy removes an in-memory block device. Subsequent calls to
     [connect] will create a fresh empty device. *)
 
-(** {6 Resizing support} *)
+(** {2 Resizing support} *)
 
 val resize : t -> int64 -> (unit, write_error) result io
 (** [resize t new_size_sectors] attempts to resize the connected device
     to have the given number of sectors. If successful, subsequent calls
     to [get_info] will reflect the new size. *)
 
-(** {6 Querying sparseness information} *)
+(** {2 Querying sparseness information} *)
 
 val seek_unmapped: t -> int64 -> (int64, error) result io
 (** [seek_unmapped t start] returns the offset of the next guaranteed
@@ -51,7 +51,7 @@ val seek_mapped: t -> int64 -> (int64, error) result io
     device which may have data in it (typically this is the next mapped
     region) *)
 
-(** {6 Compatibility} *)
+(** {2 Compatibility} *)
 
 val flush : t -> (unit, write_error) result io
 (** [flush t] is a no-op on a Ramdisk *)
