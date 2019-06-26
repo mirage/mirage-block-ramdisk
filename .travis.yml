@@ -9,6 +9,7 @@ env:
   global:
     - PACKAGE="mirage-block-ramdisk"
     - TESTS=true
+    - DISTRO=alpine
   matrix:
     - OCAML_VERSION=4.04
     - OCAML_VERSION=4.05
