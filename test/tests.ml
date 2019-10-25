@@ -16,11 +16,11 @@
  *)
 open Lwt.Infix
 
-module Compare = Mirage_block_lwt.Compare(Ramdisk)(Ramdisk)
-module Fill = Mirage_block_lwt.Fill(Ramdisk)
-module Safe = Mirage_block_lwt.Make_safe(Ramdisk)
-module Copy = Mirage_block_lwt.Copy(Ramdisk)(Ramdisk)
-module Sparse_copy = Mirage_block_lwt.Sparse_copy(Ramdisk)(Ramdisk)
+module Compare = Mirage_block_combinators.Compare(Ramdisk)(Ramdisk)
+module Fill = Mirage_block_combinators.Fill(Ramdisk)
+module Safe = Mirage_block_combinators.Make_safe(Ramdisk)
+module Copy = Mirage_block_combinators.Copy(Ramdisk)(Ramdisk)
+module Sparse_copy = Mirage_block_combinators.Sparse_copy(Ramdisk)(Ramdisk)
 
 let expect_ok msg = function
   | Error _ -> failwith msg
