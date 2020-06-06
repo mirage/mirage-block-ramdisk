@@ -1,3 +1,6 @@
+## 0.5 (2020-06-06)
+- update to mirage-block.2.0.0 API (@hannes)
+
 ## 0.4 (2019-06-26)
 - port to dune (@avsm)
 - odoc fixes (@avsm)
