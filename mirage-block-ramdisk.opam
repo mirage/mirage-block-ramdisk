@@ -28,3 +28,4 @@ description: """
 - Can be dynamically resized
 - Supports querying sparseness information
 """
+x-maintenance-intent: [ "(latest)" ]
