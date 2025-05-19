@@ -11,7 +11,7 @@ depends: [
   "dune"
   "alcotest" {with-test}
   "cstruct" {>= "6.0.0"}
-  "io-page"
+  "io-page" {>= "2.4.0"}
   "mirage-block" {>= "2.0.0"}
   "mirage-block-combinators" {with-test}
   "lwt"
