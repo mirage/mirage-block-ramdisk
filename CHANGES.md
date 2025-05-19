@@ -1,3 +1,10 @@
+## 0.6 (2025-05-19)
+- Restore compatibility with alcotest 1.4.0 (@craigfe #23)
+- Add x-maintenance-intent latest (@hannesm #25)
+- Fixes for the current mirage ecosystem (Cstruct.len being deprecated,
+  io-page-unix being deprecated, Fmt.kstrf being deprecated)
+  (@hannesm #26)
+
 ## 0.5 (2020-06-06)
 - update to mirage-block.2.0.0 API (@hannes)
 
