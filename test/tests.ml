@@ -27,13 +27,13 @@ let expect_ok msg = function
   | Ok x -> x
 
 let expect_ok_msg pp_error = function
-  | Error e -> Fmt.kstrf (fun s -> Alcotest.fail s) "%a" pp_error e
+  | Error e -> Fmt.kstr (fun s -> Alcotest.fail s) "%a" pp_error e
   | Ok x   -> x
 
 let expect_unsafe pp_error = function
   | Error (`Unsafe _) -> ()
   | Ok _              -> Alcotest.fail "unexpected ok"
-  | Error e           -> Fmt.kstrf (fun s -> Alcotest.fail s) "%a" pp_error e
+  | Error e           -> Fmt.kstr (fun s -> Alcotest.fail s) "%a" pp_error e
 
 let ramdisk_compare () =
   let t =
